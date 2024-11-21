@@ -1,15 +1,94 @@
-Source: template-repository
-Section: unknown
+Source: plasma-activities
+Section: libs
 Priority: optional
-Maintainer: Tsic404 <liuheng@deepin.org>
-Build-Depends: debhelper (>= 11)
-Standards-Version: 4.1.3
-Homepage: https://github.com/deepin-community/template-repository
-#Vcs-Browser: https://salsa.debian.org/debian/deepin-community-template-repository
-#Vcs-Git: https://salsa.debian.org/debian/deepin-community-template-repository.git
+Maintainer: Debian Qt/KDE Maintainers <debian-qt-kde@lists.debian.org>
+Uploaders: Aurélien COUDERC <coucouf@debian.org>,
+           Patrick Franz <deltaone@debian.org>,
+Build-Depends: cmake (>= 3.16~),
+               debhelper-compat (= 13),
+               dh-sequence-kf6,
+               dh-sequence-pkgkde-symbolshelper,
+               doxygen,
+               extra-cmake-modules (>= 6.5.0~),
+               libboost-dev (>= 1.49~),
+               libkf6config-dev (>= 6.5.0~),
+               libkf6coreaddons-dev (>= 6.5.0~),
+               libkf6windowsystem-dev (>= 6.5.0~),
+               libxkbcommon-dev,
+               qt6-base-dev (>= 6.7.0~),
+               qt6-declarative-dev (>= 6.6.0+dfsg~),
+Standards-Version: 4.7.0
+Homepage: https://invent.kde.org/plasma/plasma-activities
+Vcs-Browser: https://salsa.debian.org/qt-kde-team/kde/plasma-activities
+Vcs-Git: https://salsa.debian.org/qt-kde-team/kde/plasma-activities.git
+Rules-Requires-Root: no
 
-Package: template-repository
+Package: plasma-activities-bin
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: <insert up to 60 chars description>
- <insert long description, indented with spaces>
+Depends: ${misc:Depends}, ${shlibs:Depends},
+Description: core components for the KDE's Activities system - CLI
+ When a user is interacting with a computer, there are three main areas of
+ contextual information that may affect the behaviour of the system: who the
+ user is, where they are, and what they are doing. Activities deal with the
+ last one.
+ .
+ This package contain the command line tools for interacting with KDE
+ Activities.
+
+Package: libplasmaactivities-dev
+Section: libdevel
+Architecture: any
+Depends: libboost-dev (>= 1.49~),
+         libkf6config-dev (>= 6.5.0~),
+         libkf6coreaddons-dev (>= 6.5.0~),
+         libplasmaactivities6 (= ${binary:Version}),
+         qt6-base-dev (>= 6.7.0~),
+         ${misc:Depends},
+Recommends: libplasmaactivities6-doc (= ${source:Version}),
+Description: core components for the KDE's Activities system - development files
+ When a user is interacting with a computer, there are three main areas of
+ contextual information that may affect the behaviour of the system: who the
+ user is, where they are, and what they are doing. Activities deal with the
+ last one.
+ .
+ This package contain the development files for the shared library.
+
+Package: libplasmaactivities6-doc
+Section: doc
+Architecture: all
+Multi-Arch: foreign
+Depends: ${misc:Depends},
+Description: core components for the KDE's Activities system - documentation
+ When a user is interacting with a computer, there are three main areas of
+ contextual information that may affect the behaviour of the system: who the
+ user is, where they are, and what they are doing. Activities deal with the
+ last one.
+ .
+ This package contain the developer documentation for the shared library.
+
+Package: libplasmaactivities6
+Architecture: any
+Multi-Arch: same
+Depends: ${misc:Depends}, ${shlibs:Depends},
+Recommends: kactivitymanagerd, plasma-activities-bin,
+Description: core components for the KDE's Activities system - shared library
+ When a user is interacting with a computer, there are three main areas of
+ contextual information that may affect the behaviour of the system: who the
+ user is, where they are, and what they are doing. Activities deal with the
+ last one.
+ .
+ This package contain the shared library for interacting with KDE Activities.
+
+Package: qml6-module-org-kde-activities
+Architecture: any
+Multi-Arch: same
+Depends: libplasmaactivities6 (= ${binary:Version}),
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: core components for the KDE's Activities system - QML module
+ When a user is interacting with a computer, there are three main areas of
+ contextual information that may affect the behaviour of the system: who the
+ user is, where they are, and what they are doing. Activities deal with the
+ last one.
+ .
+ This package contain the QML module.
